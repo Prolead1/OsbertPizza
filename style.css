@@ -1,4 +1,34 @@
-/* montserrat-regular - latin */
+/*Animation keyframes*/
+@keyframes fade {
+    0%,100% { opacity:0;}
+    5%,95% { opacity:1;}
+}
+@-webkit-keyframes fade {
+    0%,100% { opacity: 0;}
+    5%,95% { opacity: 1;}
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+/*Custom font face*/
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -12,25 +42,30 @@
          url('./fonts/montserrat-v18-latin-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
   }
 
+/*global tags*/
+html{
+    height: 100%;
+}
 body{
     background-color: #ffffff;
     font-family: 'Montserrat', "Helvetica Neue", Helvetica;
     margin:0;
-    min-width: 1000px;
+    height: 100%;
+    min-width: 390px;
+    overflow: auto;
 }
-
 a{
-    color: #000000; 
+    color: #000000;
     text-decoration: none;
+    margin: 0;
+    padding: 0;
 }
-
 button{
     background-color: #ffffff;
     border: none;
    
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 14px;
     margin: 10px;
     width: 78px;
@@ -38,17 +73,43 @@ button{
     font-family: 'Montserrat',"Helvetica Neue",Helvetica;
     border-radius: 2px;
 }
-
 button:hover{
     border: 1px solid #076AE0;
     border-radius: 5px;
 }
+button:active{
+    border: 1px solid #000000;
+}
+label{
+    text-align: left;
+    font-size: 14px;
+}
+input{
+    padding: 10px 0 10px 5px;
+    border: 1px solid #c4c4c4;
+    font-family: 'Montserrat',"Helvetica Neue",Helvetica;
+}
+h1, h2, h3,h4, h5, h6 {
+    margin:20px;
+    position:relative;
+}
+::placeholder{
+    font-family: 'Montserrat',"Helvetica Neue",Helvetica;
+}
+::-moz-placeholder{
+    font-family: 'Montserrat',"Helvetica Neue",Helvetica;
+    opacity:1;
+}
+::-webkit-input-placeholder{
+    font-family: 'Montserrat',"Helvetica Neue",Helvetica;
+}
+/*Navbar*/
 .navbar{
     background-color: #076AE0;
     height: 120px;
     min-height: 120px;
     max-height: 120px;
-    margin: auto;
+    margin: 0 auto;
     display: flex;
     align-items: center;
 	justify-content: center;
@@ -64,35 +125,66 @@ button:hover{
     padding: 0;
     width: 200px;
 }
-
 .navspacing, .navbuttons{
     width: 350px;
     display: flex;
     justify-content: center;
 }
-.content{
-    animation: fadeInUp 500ms ease-in-out;
-    margin: 20px;
+
+/*Hero Page*/
+@media (max-width: 1000px) {
+    #slideshow{
+        min-width: none;
+    }
+    .navbutton{
+        display: none;
+    }
+    .slideimg{
+        width:100%;
+    }
+}
+@media (min-width: 1001px){
+    #slideshow{
+        min-width: 1000px;
+    }
+    .slideimg{
+        width: 800px;
+        height: 500px;
+    }
+}
+.hero{
     text-align: center;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    position:relative;
+}
+.hero::before {    
+    content: "";
+    background-image: url('./assets/pizza-bg.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.05;
 }
 
 #slideshow{
     margin: 0 auto;
     max-width:80%;
-    min-width: 1000px;
-
+    position:relative;
 }
 #slides{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     width: 100%;
 }
 .slideimg{
@@ -103,45 +195,91 @@ button:hover{
 	display: none;
     text-align: center;
 }
-
 [data-component="slideshow"] .slide.active {
     flex-grow: 2;
 	display: block;
-    animation: fade 250ms ease-in-out;
-    
+    animation: fade 10000ms;
+}
+.navbutton{
+    min-width: 150px;
+    width: 150px;
+}
+/*Login and Register Page*/
+.login{
+    background-color: #076AE0;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height:100%;
+    min-height: 500px;
+}
+.loginbox{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    padding: 40px 20px;
+}
+.formheader{
+    font-size:16px;
+    font-weight: 900;
+    margin:20px 0;
+}
+#loginform{
+    width: 100%;
+    padding:0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+}
+.forminput{
+    width: 100%;
+}
+.formtext{
+    width:260px;
+    margin: 10px 0;
+}
+.bottomtext{
+    font-size:10px;
+    text-align: center;
+}
+.bluelink{
+    color: #076AE0;
+}
+.bluebutton{
+    background-color: #076AE0;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 10px;
+    width: 120px;
+    height: 32px;
+    font-family: 'Montserrat',"Helvetica Neue",Helvetica;
+}
+.bluebutton:hover{
+    border: 1px solid #c4c4c4;
+}
+.bluebutton:active{
+    border: 1px solid #000000;
+}
+.alignleft{
+    align-self: flex-start;
+    margin: 0;
 }
 
-@keyframes fade {
-    0% { opacity:0;}
-    100% { opacity:1;}
-}
-
-@-webkit-keyframes fade {
-    0% { opacity: 0;}
-    100% { opacity: 1;}
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@-webkit-keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateY(40px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-    }
-}
+/*Footer*/
 .footer{
     border-top: 1px solid #c4c4c4;
     margin: auto;
