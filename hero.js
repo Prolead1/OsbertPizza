@@ -1,5 +1,7 @@
 
 var slideshows = document.querySelectorAll('[data-component="slideshow"]');
+var leftbutton = document.getElementById("display-left");
+var rightbutton = document.getElementById("display-right");
 slideshows.forEach(initSlideShow);
 
 function initSlideShow(slideshow) {
@@ -9,7 +11,25 @@ function initSlideShow(slideshow) {
 	var index = 0, time = 5000;
 	slides[index].classList.add('active');
 
-	setInterval( () => {
+    leftbutton.addEventListener('click', () => {
+        clearInterval(timer);
+        timer = setInterval(autoNextSlide, time);
+        slides[index].classList.remove('active');
+        index -= 1;
+        if (index < 0) index = slides.length - 1;
+        slides[index].classList.add('active');
+    })
+    rightbutton.addEventListener('click', () => {
+        clearInterval(timer);
+        timer = setInterval(autoNextSlide, time);
+        slides[index].classList.remove('active');
+        index += 1;
+        if (index === slides.length) index = 0;
+        slides[index].classList.add('active');
+    })
+    
+    var timer = setInterval( autoNextSlide, time);
+    function autoNextSlide(){
 		slides[index].classList.remove('active');
 		
 		index++;
@@ -17,5 +37,5 @@ function initSlideShow(slideshow) {
 
 		slides[index].classList.add('active');
 
-	}, time);
+	}
 }
