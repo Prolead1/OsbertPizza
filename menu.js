@@ -1,21 +1,84 @@
 var tabgroup = document.querySelectorAll('[data-component="tablist"]')[0];
 var menulist = document.querySelectorAll('[data-component="menulist"]')[0];
-try{
-    var index = document.cookie.split('; ').find(row => row.startsWith('index')).split('=')[1];
-}
-catch(e){
-    var index = 0;
-}
 var data = [[{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a promo cheese pizza"}],
             [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is ala carte cheese pizza"}],
             [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a meal cheese pizza"}],
             [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a side cheese pizza"}],
             [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a drink cheese pizza"}]];
-populateMenu();
-updateTab();
 
+window.addEventListener('load', () => {
+    console.log(document.cookie);
+    try{
+        var index = document.cookie.split('; ').find(row => row.startsWith('index')).split('=')[1];
+        var mylocation = document.cookie.split('; ').find(row => row.startsWith('location')).split('=')[1];
+    }catch(e){
+        if (index === undefined || index === null) var index = 0;
+        if (mylocation === null || mylocation === undefined) setLocation();
+    }
 
-function updateTab(){
+    populateMenu();
+    updateTab(index);
+})
+
+function handleSubmit(location){
+    
+    if (location[1] > 1){
+        console.log("submitted");
+        mylocationchooser = document.getElementById("location");
+        mylocationchooser.classList.remove("active");
+        document.body.classList.remove("preventscroll");
+        document.cookie = "location=["+location[0]+","+location[1]+"]; max-age=31536000";
+        console.log(document.cookie);
+        var locationinfo = document.querySelector("h6.locationinfo");
+        locationinfo.innerHTML = "Delivering to: "+ location;
+    }
+}
+
+function setLocation(){
+    document.cookie = "location=";
+    var mylocationchooser = document.getElementById("location");
+    var submitinput = document.getElementById("inputsubmit");
+    var inputcoords = [];
+    mylocationchooser.classList.add("active");
+    document.body.classList.add("preventscroll");
+    currentlocationinfo = document.getElementById("currentlocationinfo");
+    inputlocationinfo = document.getElementById("inputlocationinfo");
+
+    if(!navigator.geolocation) {
+        console.log('Geolocation is not supported by your browser');
+      } else {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const latitude  = position.coords.latitude.toFixed(3);
+            const longitude = position.coords.longitude.toFixed(3);
+            mylocation = [latitude, longitude];
+            currentlocationinfo.innerHTML = "Current location: <br>"+mylocation[0]+", "+mylocation[1];
+            
+            currentlocationinfo.addEventListener("click", (event) => {
+                event.preventDefault();
+                handleSubmit(mylocation)});
+        }, error);
+      }
+    
+    mylocationinput = document.getElementById("locationinput");
+
+    mylocationinput.addEventListener("input", (event) => {
+        event.preventDefault();
+        inputcoords = [((mylocationinput.value%1000)/7).toFixed(3), (mylocationinput.value/13000).toFixed(3)];
+        inputlocationinfo.innerHTML = "Input location: <br>"+inputcoords[0]+", "+inputcoords[1];
+        inputlocationinfo.addEventListener("change", handleSubmit(inputcoords));
+    })
+    
+}
+function success(position) {
+
+  }
+
+function error() {
+    console.error('Unable to retrieve your location');
+    currentlocationinfo.innerHTML = 'Unable to retrieve your location, search by Postal Code';
+  }
+
+function updateTab(index){
     tabgroup.children[index].classList.add('active');
     menulist.children[index].classList.add('active');
 
@@ -25,13 +88,12 @@ function updateTab(){
         index = [...event.target.parentElement.children].indexOf(event.target);
         tabgroup.children[index].classList.add('active');
         menulist.children[index].classList.add('active');
-        document.cookie = "index="+index+";";
+        document.cookie = "index="+index+";max-age=31536000";
     })
 }
 
 
 function addMenuItem(menuinfo, menulist){
-    console.log(menuinfo["image"]);
     const menuitem = document.createElement("div");
     const menuicon = document.createElement("div");
     const menuimage = document.createElement("img");
@@ -59,7 +121,6 @@ function addMenuItem(menuinfo, menulist){
 function populateMenu(){
     for (var j=0; j<5; j++){
         for (var i=0;i<data[j].length;i++){
-            console.log(data[j])
             addMenuItem(data[j][i], menulist.children[j]);
         }
 }

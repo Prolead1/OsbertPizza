@@ -20,8 +20,18 @@
             <input id="cart" type="image" src="assets/cart.png" onclick="location.href='cart.html';">
         </div>
     </nav>
+    <div id="location">
+        <div class="locationbox">
+            <h3>Choose Delivery Location</h3>
+            <input type="search number" id="locationinput" placeholder="Search by Postal Code" maxlength="6">
+            <div id="inputlocationinfo"></div>
+            <div id="currentlocationinfo"></div>            
+        </div>
+    </div>
     <div class="hero">
+        <h6 class="locationinfo"></h6><h6 class="bluelink" onclick="setLocation()">Change</h6>
         <h1>Menu</h1>
+
         <div class="tabgroup" data-component="tablist">
             <div class="tabitem">Promotions</div>
             <div class="tabitem">Ala Carte</div>
@@ -29,8 +39,9 @@
             <div class="tabitem">Sides</div>
             <div class="tabitem">Drinks</div>
         </div>
+
         <div class="menucontainer" data-component="menulist">
-          <div class ="menuitems" data-component="itemlist1">
+            <div class ="menuitems" data-component="itemlist1">
             </div>
 
             <div class ="menuitems" data-component="itemlist2">
@@ -44,7 +55,7 @@
 
             <div class ="menuitems" data-component="itemlist5">
             </div>
-
+            <input type="button" class="bluebutton biggerbutton" value="View Cart" onclick="location.href='cart.html'">
         </div>
     </div>
     <footer class="footer">

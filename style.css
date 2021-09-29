@@ -300,6 +300,48 @@ h1, h2, h3,h4, h5, h6 {
     width:30px;
 }
 
+#location{
+    position: fixed;
+    width:100vw;
+    height:100vh;
+    z-index: 100;
+    background-color:rgba(0,0,0,0.5);
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    top: 0;
+}
+
+.locationbox{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    height: 500px;
+    width: 300px;
+    padding: 20px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    gap: 20px;
+}
+#currentlocationinfo, #inputlocationinfo {
+    text-align: center;
+}
+#location.active{
+    display:flex;
+}
+.locationsubmit{
+    width: 100%;
+}
+.preventscroll{
+    overflow: hidden;
+}
+.locationbox input{
+    text-align: center;
+}
+
 @media (max-width: 650px){
     .tabgroup{
         flex-direction: column;
@@ -364,6 +406,11 @@ h1, h2, h3,h4, h5, h6 {
 .menuimage{
     height:200px;
     width:200px;
+}
+.biggerbutton{
+    width:200px;
+    height: 50px;
+    font-size: 14px;
 }
 /*Footer*/
 .footer{
