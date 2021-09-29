@@ -4,104 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osbert Pizza</title>
+    <title>Contact Us</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image" href="./assets/favicon.ico">
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbuttons">
-            <input id="navigation" type="image" src="./assets/nav.png">
-        </div>
         <div class="logo">
-            <a href="./menu.html"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
-        </div>
-        <div class="navbuttons">
-            <input id="cart" type="image" src="assets/cart.png">
+            <a id="homelink" href="./hero.html"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
         </div>
     </nav>
     <div class="hero">
-        <h1>Menu</h1>
-        <div class="tabgroup" data-component="tablist">
-            <div class="tabitem active">Promotions</div>
-            <div class="tabitem">Ala Carte</div>
-            <div class="tabitem">Meals</div>
-            <div class="tabitem">Sides</div>
-            <div class="tabitem">Drinks</div>
-        </div>
-        <div class="menucontainer" data-component="menulist">
-          <div class ="menuitems active" data-component="itemlist1">
-            <div class="menuitem">
-                <div class="menuicon">
-                    <img class="menuimage" src="placeholder">
-                    <h4>Promotions Item Name</h4>
-                </div>
-                <div class="menudescription">
-                    Description
-                </div>
-            </div>
-            </div>
-
-            <div class ="menuitems" data-component="itemlist2">
-                <div class="menuitem">
-                    <div class="menuicon">
-                        <img class="menuimage" src="placeholder">
-                        <h4>Item Name</h4>
-                    </div>
-                    <div class="menudescription">
-                        Description
-                    </div>
-                </div>
-            </div>
-
-            <div class ="menuitems" data-component="itemlist3">
-                <div class="menuitem">
-                    <div class="menuicon">
-                        <img class="menuimage" src="placeholder">
-                        <h4>Item Name</h4>
-                    </div>
-                    <div class="menudescription">
-                        Description
-                    </div>
-                </div>
-            </div>
-
-            <div class ="menuitems" data-component="itemlist4">
-                <div class="menuitem">
-                    <div class="menuicon">
-                        <img class="menuimage" src="placeholder">
-                        <h4>Item Name</h4>
-                    </div>
-                    <div class="menudescription">
-                        Description
-                    </div>
-                </div>
-            </div>
-
-            <div class ="menuitems" data-component="itemlist5">
-                <div class="menuitem">
-                    <div class="menuicon">
-                        <img class="menuimage" src="placeholder">
-                        <h4>Item Name</h4>
-                    </div>
-                    <div class="menudescription">
-                        Description
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <h1>Contact Us</h1>
     </div>
     <footer class="footer">
         <div class="footerrow">
             <div class="footercol" id="footercol1">
               <h3 class="footertitle">Sitemap</h3>
               <ul class="footerlinks" type="None">
-                  <li><a class="sitelink" href="cart.html">Cart</a></li>
-                  <li><a class="sitelink" href="status.html">Delivery Status</a></li>
-                  <li><a class="sitelink" href="contact.html">Contact Us</a></li>
-                  <li><a class="sitelink" href="feedback.html">Feedback</a></li>
-                  <li><a class="sitelink" href="account.html">My Account</a></li>
+                  <div id="unregistered" class="">
+                    <li><a class="sitelink" href="./hero.html">Home</li>
+                    <li><a class="sitelink" href="register.html">Register</a></li>
+                    <li><a class="sitelink" href="login.html">Log In</a></li>
+                  </div>
+                  <div id="registered" class="active">
+                    <li><a class="sitelink" href="menu.html">Menu</a></li>
+                    <li><a class="sitelink" href="cart.html">Cart</a></li>
+                    <li><a class="sitelink" href="status.html">Delivery Status</a></li>
+                    <li><a class="sitelink" href="feedback.html">Feedback</a></li>
+                    <li><a class="sitelink" href="account.html">My Account</a></li>
+                  </div>
               </ul>
             </div>
             <div class="footercol" id="footercol2">
@@ -120,3 +52,19 @@
         </div>
     </footer>
   </body>
+  <script>
+      var referrer = document.referrer;
+      var unregistered = document.getElementById("unregistered");
+      var registered = document.getElementById("registered");
+      console.log(referrer);
+      if (referrer.includes("hero") || referrer.includes("login") || referrer.includes("register") || referrer.includes("contact")){
+          unregistered.classList.add("active");
+          registered.classList.remove("active");
+      }
+      else{
+          registered.classList.add("active");
+          unregistered.classList.remove("active");
+          var homelink = document.getElementById("homelink");
+          homelink.href = "./menu.html";
+      }
+  </script>

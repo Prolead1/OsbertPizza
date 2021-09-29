@@ -278,7 +278,92 @@ h1, h2, h3,h4, h5, h6 {
     align-self: flex-start;
     margin: 0;
 }
+#paymentrow{
+    display: flex;
+    flex-direction: row;
+}
+#cardexpiry{
+    width:120px;
+    margin-right: 5px;
+}
+#cvv{
+    width:120px;
+    margin-left:5px;
+}
 
+#cart{
+    width:40px;
+    border: none;
+}
+#navigation{
+    border:none;
+    width:30px;
+}
+
+@media (max-width: 1000px){
+    .tabgroup{
+        flex-direction: column;
+    }
+}
+.tabgroup{
+    position:relative;
+    display:flex;
+    justify-content: space-between;
+    border: 1px solid #c4c4c4;
+    margin:0;
+}
+
+[data-component="tablist"] .tabitem{
+    border: 1px solid #c4c4c4;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    margin:0;
+    background-color: #ffffff;
+}
+[data-component="tablist"] .tabitem:hover{
+    font-weight: bold;
+}
+[data-component="tablist"] .tabitem.active{
+    background-color: #076AE0;
+    color: #ffffff;
+}
+.menucontainer{
+    position: relative;
+    border: 1px solid #c4c4c4;
+}
+[data-component="menulist"] .menuitems{
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    flex-flow: wrap;
+}
+
+[data-component="menulist"] .menuitems.active{
+    display: flex;
+}
+.menuitem{
+    border: 1px solid #c4c4c4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: #ffffff;
+    margin: 20px;
+}
+
+.menuicon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuimage{
+    height:200px;
+    width:200px;
+}
 /*Footer*/
 .footer{
     border-top: 1px solid #c4c4c4;
@@ -330,4 +415,11 @@ h1, h2, h3,h4, h5, h6 {
 }
 .socialicon:hover{
     fill:#c4c4c4;
+}
+
+#registered, #unregistered{
+    display:none;
+}
+#registered.active, #unregistered.active{
+    display:block;
 }
