@@ -90,7 +90,7 @@ input{
     font-family: 'Montserrat',"Helvetica Neue",Helvetica;
 }
 h1, h2, h3,h4, h5, h6 {
-    margin:20px;
+    margin:20px 0;
     position:relative;
 }
 ::placeholder{
@@ -300,7 +300,7 @@ h1, h2, h3,h4, h5, h6 {
     width:30px;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 650px){
     .tabgroup{
         flex-direction: column;
     }
@@ -351,6 +351,7 @@ h1, h2, h3,h4, h5, h6 {
     align-content: center;
     background-color: #ffffff;
     margin: 20px;
+    width: 200px;
 }
 
 .menuicon{
