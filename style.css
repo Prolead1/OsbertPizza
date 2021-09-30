@@ -93,6 +93,10 @@ h1, h2, h3,h4, h5, h6 {
     margin:20px 0;
     position:relative;
 }
+ul{
+    margin:0;
+    padding:0;
+}
 ::placeholder{
     font-family: 'Montserrat',"Helvetica Neue",Helvetica;
 }
@@ -130,7 +134,28 @@ h1, h2, h3,h4, h5, h6 {
     display: flex;
     justify-content: center;
 }
-
+.sidebarnav{
+    display: none;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #c4c4c4;
+    padding:0;
+    margin:0;
+    min-width: 200px;;
+}
+.sidebarnav.active{
+    display: flex;
+}
+.sidebarnav ul{
+    width: 100%;
+}
+.sidebarnav li{
+    width: 100%;
+    border: 1px solid #c4c4c4;
+    padding: 20px 0;
+}
 /*Hero Page*/
 @media (max-width: 1000px) {
     #slideshow{
@@ -152,6 +177,10 @@ h1, h2, h3,h4, h5, h6 {
         height: 500px;
     }
 }
+.content{
+    display:flex;
+    flex-direction:row;
+}
 .hero{
     text-align: center;
     -moz-user-select: none;
@@ -160,6 +189,7 @@ h1, h2, h3,h4, h5, h6 {
     -ms-user-select: none;
     user-select: none;
     position:relative;
+    flex-grow: 3;
 }
 .hero::before {    
     content: "";
@@ -255,6 +285,7 @@ h1, h2, h3,h4, h5, h6 {
 }
 .bluelink{
     color: #076AE0;
+    margin:0;
 }
 .bluebutton{
     background-color: #076AE0;
@@ -282,13 +313,9 @@ h1, h2, h3,h4, h5, h6 {
     display: flex;
     flex-direction: row;
 }
-#cardexpiry{
+#cardexpiry, #cvv{
     width:120px;
     margin-right: 5px;
-}
-#cvv{
-    width:120px;
-    margin-left:5px;
 }
 
 #cart{
@@ -311,8 +338,16 @@ h1, h2, h3,h4, h5, h6 {
     justify-content:center;
     align-items:center;
     top: 0;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
+.locationinfo{
+    margin: 20px 0 0 0;
+}
 .locationbox{
     background-color: #ffffff;
     display: flex;
@@ -328,6 +363,10 @@ h1, h2, h3,h4, h5, h6 {
 }
 #currentlocationinfo, #inputlocationinfo {
     text-align: center;
+    cursor: pointer;
+}
+#currentlocationinfo:hover, #inputlocationinfo:hover{
+    font-weight: bold;
 }
 #location.active{
     display:flex;
@@ -359,6 +398,7 @@ h1, h2, h3,h4, h5, h6 {
     border: 1px solid #c4c4c4;
     height: 100%;
     width: 100%;
+    min-width: 110px;
     padding: 20px;
     margin:0;
     background-color: #ffffff;
@@ -406,6 +446,10 @@ h1, h2, h3,h4, h5, h6 {
 .menuimage{
     height:200px;
     width:200px;
+}
+
+.menudescription{
+    padding: 10px;
 }
 .biggerbutton{
     width:200px;

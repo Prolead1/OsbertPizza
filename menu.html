@@ -23,13 +23,16 @@
     <div id="location">
         <div class="locationbox">
             <h3>Choose Delivery Location</h3>
+            
             <input type="search number" id="locationinput" placeholder="Search by Postal Code" maxlength="6">
+            <h5>Select where to deliver your order below</h5>
             <div id="inputlocationinfo"></div>
             <div id="currentlocationinfo"></div>            
         </div>
     </div>
+    <div class="content">
     <div class="hero">
-        <h6 class="locationinfo"></h6><h6 class="bluelink" onclick="setLocation()">Change</h6>
+        <h4 class="locationinfo"></h4><h5 class="bluelink" onclick="setLocation()">Change Location</h5>
         <h1>Menu</h1>
 
         <div class="tabgroup" data-component="tablist">
@@ -57,6 +60,7 @@
             </div>
             <input type="button" class="bluebutton biggerbutton" value="View Cart" onclick="location.href='cart.html'">
         </div>
+    </div>
     </div>
     <footer class="footer">
         <div class="footerrow">
@@ -87,3 +91,4 @@
     </footer>
   </body>
   <script type="text/javascript" src="./menu.js"></script>
+  <script type="text/javascript" src="./nav.js"></script>

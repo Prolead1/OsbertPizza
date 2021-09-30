@@ -1,21 +1,23 @@
 var tabgroup = document.querySelectorAll('[data-component="tablist"]')[0];
 var menulist = document.querySelectorAll('[data-component="menulist"]')[0];
-var data = [[{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a promo cheese pizza"}],
-            [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is ala carte cheese pizza"}],
-            [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a meal cheese pizza"}],
-            [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a side cheese pizza"}],
-            [{"name":"cheese pizza", "image":"./cheese.png", "description":"This is a drink cheese pizza"}]];
+var data = [[{"name":"cheese pizza", "image":"./assets/cheese.jpg", "description":"This is a promo cheese pizza"}],
+            [{"name":"cheese pizza", "image":"./assets/cheese.jpg", "description":"This is ala carte cheese pizza"}],
+            [{"name":"cheese pizza", "image":"./assets/cheese.jpg", "description":"This is a meal cheese pizza"}],
+            [{"name":"cheese pizza", "image":"./assets/cheese.jpg", "description":"This is a side cheese pizza"}],
+            [{"name":"cheese pizza", "image":"./assets/cheese.jpg", "description":"This is a drink cheese pizza"}]];
 
 window.addEventListener('load', () => {
-    console.log(document.cookie);
     try{
         var index = document.cookie.split('; ').find(row => row.startsWith('index')).split('=')[1];
         var mylocation = document.cookie.split('; ').find(row => row.startsWith('location')).split('=')[1];
+        console.log(mylocation+" "+index);
     }catch(e){
-        if (index === undefined || index === null) var index = 0;
-        if (mylocation === null || mylocation === undefined) setLocation();
+        console.error(e)
     }
-
+    if (index === undefined || index === null) var index = 0;
+    if (mylocation === null || mylocation === undefined || mylocation === "") setLocation();
+    var locationinfo = document.querySelector("h4.locationinfo");
+    locationinfo.innerHTML = "Delivering to: "+ mylocation;
     populateMenu();
     updateTab(index);
 })
@@ -27,9 +29,9 @@ function handleSubmit(location){
         mylocationchooser = document.getElementById("location");
         mylocationchooser.classList.remove("active");
         document.body.classList.remove("preventscroll");
-        document.cookie = "location=["+location[0]+","+location[1]+"]; max-age=31536000";
+        document.cookie = "location=["+location[0]+","+location[1]+"]; max-age=31536000;";
         console.log(document.cookie);
-        var locationinfo = document.querySelector("h6.locationinfo");
+        var locationinfo = document.querySelector("h4.locationinfo");
         locationinfo.innerHTML = "Delivering to: "+ location;
     }
 }
@@ -45,7 +47,7 @@ function setLocation(){
     inputlocationinfo = document.getElementById("inputlocationinfo");
 
     if(!navigator.geolocation) {
-        console.log('Geolocation is not supported by your browser');
+        error();
       } else {
         navigator.geolocation.getCurrentPosition((position) => {
             const latitude  = position.coords.latitude.toFixed(3);
@@ -62,20 +64,18 @@ function setLocation(){
     mylocationinput = document.getElementById("locationinput");
 
     mylocationinput.addEventListener("input", (event) => {
-        event.preventDefault();
         inputcoords = [((mylocationinput.value%1000)/7).toFixed(3), (mylocationinput.value/13000).toFixed(3)];
         inputlocationinfo.innerHTML = "Input location: <br>"+inputcoords[0]+", "+inputcoords[1];
-        inputlocationinfo.addEventListener("change", handleSubmit(inputcoords));
+        inputlocationinfo.addEventListener("click", (event) => {
+            event.preventDefault();
+            handleSubmit(inputcoords)});
     })
     
 }
-function success(position) {
-
-  }
 
 function error() {
     console.error('Unable to retrieve your location');
-    currentlocationinfo.innerHTML = 'Unable to retrieve your location, search by Postal Code';
+    currentlocationinfo.innerHTML = 'Unable to retrieve your current location, search by Postal Code';
   }
 
 function updateTab(index){
@@ -88,7 +88,7 @@ function updateTab(index){
         index = [...event.target.parentElement.children].indexOf(event.target);
         tabgroup.children[index].classList.add('active');
         menulist.children[index].classList.add('active');
-        document.cookie = "index="+index+";max-age=31536000";
+        document.cookie = "index="+index+";max-age=31536000;";
     })
 }
 
