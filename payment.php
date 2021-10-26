@@ -11,12 +11,12 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <a href="./menu.html"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
+            <a href="./menu.php"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
         </div>
     </nav>
     <div class="login">
         <div class="loginbox">
-            <p class="bottomtext alignleft"><a class="bluelink" href="./cart.html">&#10094;Back to cart</a></p>
+            <p class="bottomtext alignleft"><a class="bluelink" href="./cart.php">&#10094;Back to cart</a></p>
             <h3 class="formheader"><strong>Billing Details</strong></h3>
             <form id="loginform" method="post" action="login.php">
                 <div class="forminput">
@@ -42,7 +42,6 @@
                 </div>
                 <input type="button" class="bluebutton" value="Log in">
             </form>
-            <p class="bottomtext">Already have an account? <a class="bluelink" href="./login.html">Log in</a></p>
         </div>
 
     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osbert Pizza</title>
+    <title>Delivery Status</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image" href="./assets/favicon.ico">
 </head>
@@ -14,52 +14,15 @@
             <input id="navigation" type="image" src="./assets/nav.png">
         </div>
         <div class="logo">
-            <a href="./menu.html"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
+            <a href="./menu.php"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
         </div>
         <div class="navbuttons">
-            <input id="cart" type="image" src="assets/cart.png" onclick="location.href='cart.html';">
+            <input id="cart" type="image" src="assets/cart.png" onclick="location.href='cart.php';">
         </div>
     </nav>
-    <div id="location">
-        <div class="locationbox">
-            <h3>Choose Delivery Location</h3>
-            
-            <input type="search number" id="locationinput" placeholder="Search by Postal Code" maxlength="6">
-            <h5>Select where to deliver your order below</h5>
-            <div id="inputlocationinfo"></div>
-            <div id="currentlocationinfo"></div>            
-        </div>
-    </div>
     <div class="content">
     <div class="hero">
-        <h4 class="locationinfo"></h4><h5 class="bluelink" onclick="setLocation()">Change Location</h5>
-        <h1>Menu</h1>
-
-        <div class="tabgroup" data-component="tablist">
-            <div class="tabitem">Promotions</div>
-            <div class="tabitem">Ala Carte</div>
-            <div class="tabitem">Meals</div>
-            <div class="tabitem">Sides</div>
-            <div class="tabitem">Drinks</div>
-        </div>
-
-        <div class="menucontainer" data-component="menulist">
-            <div class ="menuitems" data-component="itemlist1">
-            </div>
-
-            <div class ="menuitems" data-component="itemlist2">
-            </div>
-
-            <div class ="menuitems" data-component="itemlist3">
-            </div>
-
-            <div class ="menuitems" data-component="itemlist4">
-            </div>
-
-            <div class ="menuitems" data-component="itemlist5">
-            </div>
-            <input type="button" class="bluebutton biggerbutton" value="View Cart" onclick="location.href='cart.html'">
-        </div>
+        <h1>Delivery Status</h1>
     </div>
     </div>
     <footer class="footer">
@@ -67,11 +30,11 @@
             <div class="footercol" id="footercol1">
               <h3 class="footertitle">Sitemap</h3>
               <ul class="footerlinks" type="None">
-                  <li><a class="sitelink" href="cart.html">Cart</a></li>
-                  <li><a class="sitelink" href="status.html">Delivery Status</a></li>
+                  <li><a class="sitelink" href="menu.php">Menu</a></li>
+                  <li><a class="sitelink" href="cart.php">Cart</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
                   <li><a class="sitelink" href="feedback.html">Feedback</a></li>
-                  <li><a class="sitelink" href="account.html">My Account</a></li>
+                  <li><a class="sitelink" href="account.php">My Account</a></li>
               </ul>
             </div>
             <div class="footercol" id="footercol2">

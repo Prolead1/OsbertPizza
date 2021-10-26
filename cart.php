@@ -14,10 +14,10 @@
             <input id="navigation" type="image" src="./assets/nav.png">
         </div>
         <div class="logo">
-            <a href="./menu.html"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
+            <a href="./menu.php"><img id="logo" src="assets\Osbert Pizza-logos_white.png"></a>
         </div>
         <div class="navbuttons">
-            <input id="cart" type="image" src="assets/cart.png" onclick="location.href='cart.html';">
+            <input id="cart" type="image" src="assets/cart.png" onclick="location.href='cart.php';">
         </div>
     </nav>
     <div class="content">
@@ -30,11 +30,11 @@
             <div class="footercol" id="footercol1">
               <h3 class="footertitle">Sitemap</h3>
               <ul class="footerlinks" type="None">
-                  <li><a class="sitelink" href="menu.html">Menu</a></li>
-                  <li><a class="sitelink" href="status.html">Delivery Status</a></li>
+                  <li><a class="sitelink" href="menu.php">Menu</a></li>
+                  <li><a class="sitelink" href="status.php">Delivery Status</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
                   <li><a class="sitelink" href="feedback.html">Feedback</a></li>
-                  <li><a class="sitelink" href="account.html">My Account</a></li>
+                  <li><a class="sitelink" href="account.php">My Account</a></li>
               </ul>
             </div>
             <div class="footercol" id="footercol2">
