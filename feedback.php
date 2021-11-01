@@ -33,7 +33,7 @@
                   <li><a class="sitelink" href="menu.php">Menu</a></li>
                   <li><a class="sitelink" href="status.php">Delivery Status</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
-                  <li><a class="sitelink" href="feedback.html">Feedback</a></li>
+                  <li><a class="sitelink" href="feedback.php">Feedback</a></li>
                   <li><a class="sitelink" href="account.php">My Account</a></li>
               </ul>
             </div>

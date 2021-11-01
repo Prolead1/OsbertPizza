@@ -7,8 +7,17 @@
     <title>Cart</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image" href="./assets/favicon.ico">
+    <script type="module" src="./js/helpers.js"></script>
 </head>
 <body>
+<?php  
+    require("php/helpers.php");
+    loginstatus();
+    if (!isset($data)){
+        $data = getdata("SELECT * FROM menuitems ORDER BY category");
+    }
+
+?>
     <nav class="navbar">
         <div class="navbuttons">
             <input id="navigation" type="image" src="./assets/nav.png">
@@ -20,9 +29,26 @@
             <input id="cart" type="image" src="assets/cart.png" onclick="location.href='cart.php';">
         </div>
     </nav>
+    <div id="location">
+        <div class="locationbox">
+            <h3>Choose Delivery Location</h3>
+            <input type="search number" id="locationinput" placeholder="Search by Postal Code" maxlength="6">
+            <h5>Select where to deliver your order below</h5>
+            <div id="inputlocationinfo"></div>
+            <div id="currentlocationinfo"></div>            
+        </div>
+    </div>
     <div class="content">
-    <div class="hero">
+    <div class="hero" data-content="<?php echo htmlspecialchars($data);?>">
+    <h4 class="locationinfo"></h4><h5 class="bluelink" id="changeloc">Change Location</h5>
         <h1>Cart</h1>
+        <h2 id="carttotal"></h2>
+        <div class="cart">
+        </div>
+        <div id="makepayment">
+            <button class="bluebutton" onclick="window.location.href='./payment.php'">Make Payment</button>
+        </div>
+        
     </div>
     </div>
     <footer class="footer">
@@ -33,7 +59,7 @@
                   <li><a class="sitelink" href="menu.php">Menu</a></li>
                   <li><a class="sitelink" href="status.php">Delivery Status</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
-                  <li><a class="sitelink" href="feedback.html">Feedback</a></li>
+                  <li><a class="sitelink" href="feedback.php">Feedback</a></li>
                   <li><a class="sitelink" href="account.php">My Account</a></li>
               </ul>
             </div>
@@ -53,5 +79,6 @@
         </div>
     </footer>
   </body>
-  <script type="text/javascript" src="./menu.js"></script>
-  <script type="text/javascript" src="./nav.js"></script>
+<script type="module" src="./cart.js"></script>
+<script type="text/javascript" src="./nav.js"></script>
+</html>

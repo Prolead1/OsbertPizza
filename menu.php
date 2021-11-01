@@ -10,9 +10,9 @@
 </head>
 <body>
 <?php 
-        require("php/databaseconn.php");
-        $data = dbquery("SELECT * FROM menuitems ORDER BY category");
-        echo $data;
+        require("php/helpers.php");
+        loginstatus();
+        $data = getdata("SELECT * FROM menuitems ORDER BY category");
     ?>
     <nav class="navbar">
         <div class="navbuttons">
@@ -36,8 +36,8 @@
         </div>
     </div>
     <div class="content">
-    <div class="hero">
-        <h4 class="locationinfo"></h4><h5 class="bluelink" onclick="setLocation()">Change Location</h5>
+    <div class="hero" data-content="<?php echo htmlspecialchars($data);?>">
+    <h4 class="locationinfo"></h4><h5 class="bluelink"onclick="setLocation();">Change Location</h5>
         <h1>Menu</h1>
 
         <div class="tabgroup" data-component="tablist">
@@ -75,7 +75,7 @@
                   <li><a class="sitelink" href="cart.php">Cart</a></li>
                   <li><a class="sitelink" href="status.php">Delivery Status</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
-                  <li><a class="sitelink" href="feedback.html">Feedback</a></li>
+                  <li><a class="sitelink" href="feedback.php">Feedback</a></li>
                   <li><a class="sitelink" href="account.php">My Account</a></li>
               </ul>
             </div>
@@ -95,5 +95,6 @@
         </div>
     </footer>
   </body>
-  <script type="text/javascript" src="./menu.js"></script>
+  <script type="module" src="./js/helpers.js"></script>
+  <script type="module" src="./menu.js"></script>
   <script type="text/javascript" src="./nav.js"></script>

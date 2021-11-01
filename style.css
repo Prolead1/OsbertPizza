@@ -10,21 +10,21 @@
 @keyframes fadeInUp {
     0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateX(-20px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 @-webkit-keyframes fadeInUp {
     0% {
         opacity: 0;
-        -webkit-transform: translateY(40px);
+        -webkit-transform: translateX(-20px);
     }
     100% {
         opacity: 1;
-        -webkit-transform: translateY(0);
+        -webkit-transform: translateX(0);
     }
 }
 
@@ -143,10 +143,11 @@ ul{
     border: 1px solid #c4c4c4;
     padding:0;
     margin:0;
-    min-width: 200px;;
+    min-width: 200px;
 }
 .sidebarnav.active{
     display: flex;
+    animation: fadeInUp 500ms ease;
 }
 .sidebarnav ul{
     width: 100%;
@@ -256,6 +257,7 @@ ul{
     align-items: center;
     justify-content:center;
     padding: 40px 20px;
+    width: 280px;
 }
 .formheader{
     font-size:16px;
@@ -450,6 +452,22 @@ ul{
 
 .menudescription{
     padding: 10px;
+    height: 60px;
+}
+
+.menuprice{
+    margin: 0;
+    padding: 10px;
+}
+.submitorder{
+    width: 100px;
+    align-self: center;
+    padding: 0px;
+}
+
+.menucontrol{
+    display: flex;
+    flex-direction: row;
 }
 .biggerbutton{
     width:200px;
@@ -514,4 +532,16 @@ ul{
 }
 #registered.active, #unregistered.active{
     display:block;
+}
+
+.cart{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-flow: wrap;
+}
+
+#makepayment{
+    position: relative;
 }

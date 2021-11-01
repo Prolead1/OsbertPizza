@@ -34,7 +34,7 @@
                   <li><a class="sitelink" href="cart.php">Cart</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
                   <li><a class="sitelink" href="status.php">Delivery Status</a></li>
-                  <li><a class="sitelink" href="feedback.html">Feedback</a></li>
+                  <li><a class="sitelink" href="feedback.php">Feedback</a></li>
               </ul>
             </div>
             <div class="footercol" id="footercol2">

@@ -9,6 +9,19 @@
     <link rel="icon" type="image" href="./assets/favicon.ico">
 </head>
 <body>
+    <?php
+        require "./php/helpers.php";
+        if (!isset($data)){
+            $data = getdata("SELECT * FROM menuitems ORDER BY category");
+        }
+        if (!isset($userid)){
+            $result = getdata("SELECT * FROM logins WHERE username ='".htmlspecialchars($_COOKIE['loginuname'])."'");
+            $row = (array)json_decode($result)[0];
+            $userid = var_export($row['userid'], true);
+        }
+        $result = getdata('SELECT paymentid, orders, userid FROM payments WHERE userid="'.$userid.'" ORDER BY paymentid DESC');
+        $current = (array)json_decode($result)[1];
+    ?>
     <nav class="navbar">
         <div class="navbuttons">
             <input id="navigation" type="image" src="./assets/nav.png">
@@ -21,8 +34,12 @@
         </div>
     </nav>
     <div class="content">
-    <div class="hero">
+    <div class="hero" data-content="<?php echo htmlspecialchars($data);?>">
         <h1>Delivery Status</h1>
+        <h5><?php 
+            echo($current["orders"]);
+        ?>
+        </h5>
     </div>
     </div>
     <footer class="footer">
@@ -33,7 +50,7 @@
                   <li><a class="sitelink" href="menu.php">Menu</a></li>
                   <li><a class="sitelink" href="cart.php">Cart</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
-                  <li><a class="sitelink" href="feedback.html">Feedback</a></li>
+                  <li><a class="sitelink" href="feedback.php">Feedback</a></li>
                   <li><a class="sitelink" href="account.php">My Account</a></li>
               </ul>
             </div>
@@ -53,5 +70,5 @@
         </div>
     </footer>
   </body>
-  <script type="text/javascript" src="./menu.js"></script>
+  <script type="text/javascript" src="./status.js"></script>
   <script type="text/javascript" src="./nav.js"></script>

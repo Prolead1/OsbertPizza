@@ -21,13 +21,18 @@
         <div class="footerrow">
             <div class="footercol" id="footercol1">
               <h3 class="footertitle">Sitemap</h3>
-              <ul class="footerlinks" type="None">
+              <ul class="footerlinks" type="None" id="registered">
                   <li><a class="sitelink" href="menu.php">Menu</a></li>
                   <li><a class="sitelink" href="status.php">Delivery Status</a></li>
                   <li><a class="sitelink" href="contact.html">Contact Us</a></li>
-                  <li><a class="sitelink" href="feedback.html">Feedback</a></li>
+                  <li><a class="sitelink" href="feedback.php">Feedback</a></li>
                   <li><a class="sitelink" href="account.php">My Account</a></li>
               </ul>
+              <ul class="footerlinks" type="None" id="unregistered">
+                <li><a class="sitelink" href="hero.html">Home</a></li>
+                <li><a class="sitelink" href="login.php">Login</a></li>
+                <li><a class="sitelink" href="register.php">Register</a></li>
+            </ul>
             </div>
             <div class="footercol" id="footercol2">
                 <h3 class="footertitle">Social</h3>
@@ -46,11 +51,16 @@
     </footer>
   </body>
   <script>
-      var referrer = document.referrer;
+      try{
+        var loginstatus = document.cookie.split('; ').find(row => row.startsWith('loginstatus')).split('=')[1];
+      }catch(e){
+          console.error(e);
+      }
+      if (loginstatus === null || loginstatus === undefined) loginstatus = "";
+      console.log(loginstatus);
       var unregistered = document.getElementById("unregistered");
       var registered = document.getElementById("registered");
-      console.log(referrer);
-      if (referrer.includes("hero") || referrer.includes("login") || referrer.includes("register") || referrer.includes("contact")){
+      if (loginstatus != "True"){
           unregistered.classList.add("active");
           registered.classList.remove("active");
       }
