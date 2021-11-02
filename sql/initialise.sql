@@ -17,13 +17,29 @@ create table menuitems
 
 create table payments
 (
-    paymentid bigint unsigned not null auto_increment primary key,
-    orders mediumtext not null,
+    paymentid bigint unsigned not null primary key,
     userid bigint unsigned not null,
     cardname varchar(255) not null,
     cardnumber int(16) not null,
     cardexpiry varchar(7) not null,
     cvv int(3) not null
+);
+
+create table orders
+(
+    paymentid bigint unsigned not null primary key,
+    orders varchar(500) not null,
+    userid bigint unsigned not null,
+    location varchar(255) not null,
+    status varchar(255) not null
+);
+
+create table feedbacks
+(
+    feedbackid bigint unsigned not null auto_increment primary key,
+    rating int not null,
+    food mediumtext not null,
+    delivery mediumtext not null
 );
 
 insert into menuitems values

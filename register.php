@@ -66,6 +66,7 @@
             if ($password1 == $password2) {
                 dbinsert('INSERT INTO logins VALUES (NULL, "'.$username.'", "'.$password1.'")');
                 setcookie("loginstatus", "True", time() + 86400);
+                setcookie("loginuname", $username, time() + 86400);
                 header('Location: ./menu.php');
                 die();
             } else {

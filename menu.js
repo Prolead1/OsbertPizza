@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
     try{
         var numitems = JSON.parse(document.cookie.split('; ').find(row => row.startsWith('numitems')).split('=')[1].split(','));
     }catch(e){
-        console.error("Cookie 'numitems' not set.");
+        console.log("No items in cart.");
     }
 
     if (index === undefined || index === null) {

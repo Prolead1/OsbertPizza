@@ -50,14 +50,16 @@ function calcTotal(numitems) {
 function populateCart(numitems){
     var cart = document.querySelectorAll('.cart')[0];
     cart.innerHTML = "";
+    var flag = true;
     Object.keys(numitems).forEach((key) => {
         if (numitems[key] !== ""){
-            console.log(key, data[mapping[key]]);
             addMenuItem(data[mapping[key]], cart, numitems);
-        }else{
-            emptyCart();
+            flag = false;
         }
     })
+    if (flag){
+        emptyCart();
+    }
 }
 
 function emptyCart(){
@@ -88,17 +90,27 @@ function addToCart(numitems){
     })
 
     var removeitem = document.querySelectorAll(".removeitem");
+    var flag = false;
     removeitem.forEach(item =>{
         item.addEventListener("click", () =>{
             var p = item.parentElement.children[1];
-            if (parseInt(p.innerHTML) <= 1){
+            if (parseInt(p.innerHTML) <= 1 || p.innerHTML == ""){
                 p.innerHTML = "";
-                emptyCart();
+                if (item.parentElement.parentElement.parentElement.children.length > 1){
+                    item.parentElement.parentElement.remove();
+                }else{
+                    flag = true;
+                }
             }else{
                 p.innerHTML = parseInt(p.innerHTML) - 1;
             }
             numitems[item.parentElement.parentElement.dataset.id] = p.innerHTML;
             document.cookie = "numitems=" + JSON.stringify(numitems);
             calcTotal(numitems);
+            if (flag){
+                emptyCart();
+            }
         })
-    });}
+    });
+
+}

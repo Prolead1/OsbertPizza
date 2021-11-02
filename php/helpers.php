@@ -5,6 +5,7 @@ function logout(){
     setcookie("index", "", time() - 3600, "./menu.php");
     setcookie("loginuname", "", time() - 3600, "./login.php");
     setcookie("numitems", "", time() - 3600, "./menu.php");
+    setcookie("paymentstatus", "", time() - 3600, "./payment.php");
     header("Location: hero.html");
 }
 

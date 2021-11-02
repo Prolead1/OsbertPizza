@@ -11,17 +11,15 @@
 <body>
     <?php
         require "./php/helpers.php";
+        loginstatus();
         if (!isset($data)){
             $data = getdata("SELECT * FROM menuitems ORDER BY category");
         }
-        if (!isset($userid)){
-            $result = getdata("SELECT * FROM logins WHERE username ='".htmlspecialchars($_COOKIE['loginuname'])."'");
-            $row = (array)json_decode($result)[0];
-            $userid = var_export($row['userid'], true);
-        }
-        $result = getdata('SELECT paymentid, orders, userid FROM payments WHERE userid="'.$userid.'" ORDER BY paymentid DESC');
-        $current = (array)json_decode($result)[1];
-    ?>
+        $result = getdata("SELECT * FROM logins WHERE username ='".htmlspecialchars($_COOKIE['loginuname'])."'");
+        $row = (array)json_decode($result)[0];
+        $userid = (int)$row['userid'];
+        $result = getdata('SELECT * FROM orders WHERE userid="'.$userid.'" ORDER BY paymentid DESC');
+            ?>
     <nav class="navbar">
         <div class="navbuttons">
             <input id="navigation" type="image" src="./assets/nav.png">
@@ -36,11 +34,11 @@
     <div class="content">
     <div class="hero" data-content="<?php echo htmlspecialchars($data);?>">
         <h1>Delivery Status</h1>
-        <h5><?php 
-            echo($current["orders"]);
-        ?>
-        </h5>
+        <div class="orderitems" data-content="<?php echo htmlspecialchars($result);?>">
+        </div>
+        <button class="bluebutton" style="position:relative;" onclick="location.href='feedback.php';">Give us feedback</button>
     </div>
+    
     </div>
     <footer class="footer">
         <div class="footerrow">
@@ -70,5 +68,5 @@
         </div>
     </footer>
   </body>
-  <script type="text/javascript" src="./status.js"></script>
+  <script type="module" src="./status.js"></script>
   <script type="text/javascript" src="./nav.js"></script>

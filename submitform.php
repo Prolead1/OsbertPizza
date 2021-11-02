@@ -9,10 +9,17 @@
     <link rel="icon" type="image" href="./assets/favicon.ico">
 </head>
 <body>
-    <?php
-    require "./php/helpers.php";
-    loginstatus();
-    ?>
+<?php
+require "./php/helpers.php";
+loginstatus();
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    $range = (int)htmlspecialchars($_POST["range"]);
+    $food = htmlspecialchars($_POST["food"]);
+    $delivery = htmlspecialchars($_POST["delivery"]);
+    $query = "INSERT INTO feedbacks VALUES (NULL, '".$range."', '".$food."', '".$delivery."')";
+    dbinsert($query);
+}
+?>
     <nav class="navbar">
         <div class="navbuttons">
             <input id="navigation" type="image" src="./assets/nav.png">
@@ -26,7 +33,12 @@
     </nav>
     <div class="content">
     <div class="hero">
-        <h1>My Account</h1>
+        <h1>Thank you for submitting your feedback.</h1>
+        <div style="position:relative;">
+        <a href="./menu.php">Click here to order with us again</a><br>
+        Or<br>
+        <a href="./logout.php">Click here to log out</a>
+        </div>
     </div>
     </div>
     <footer class="footer">
@@ -57,4 +69,5 @@
         </div>
     </footer>
   </body>
+  <script type="text/javascript" src="./menu.js"></script>
   <script type="text/javascript" src="./nav.js"></script>

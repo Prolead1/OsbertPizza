@@ -191,6 +191,7 @@ ul{
     user-select: none;
     position:relative;
     flex-grow: 3;
+    min-height: 370px;
 }
 .hero::before {    
     content: "";
@@ -468,6 +469,7 @@ ul{
 .menucontrol{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .biggerbutton{
     width:200px;
@@ -543,5 +545,47 @@ ul{
 }
 
 #makepayment{
+    position: relative;
+}
+
+.orderitems{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderitems .item{
+    display: none;
+    position: relative;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #c4c4c4;
+    background-color: #fff;
+    padding: 10px 200px;
+    margin: 20px;
+}
+.orderitems .item.active{
+    display:flex;
+}
+.orderitems .item div{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.selectorder{
+    width: 90%;
+    background-color: #076AE0;
+    color: #fff;
+}
+
+.feedback{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
     position: relative;
 }

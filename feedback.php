@@ -9,6 +9,10 @@
     <link rel="icon" type="image" href="./assets/favicon.ico" onclick="location.href='cart.php';">
 </head>
 <body>
+<?php
+    require "./php/helpers.php";
+    loginstatus();
+?>
     <nav class="navbar">
         <div class="navbuttons">
             <input id="navigation" type="image" src="./assets/nav.png">
@@ -23,6 +27,19 @@
     <div class="content">
     <div class="hero">
         <h1>Feedback</h1>
+        <div class="feedback">
+            <h3 class="formheader"><strong>Give us your feedback below!</strong></h3>
+            <form id="loginform" method="post" action="./submitform.php">
+                    <label for="range">How would you rate your overall experience with us?</label><br>
+                    <input type="range" name="range" min="1" max="5" value="2" required>
+                    <label for="food">Any comments for the food? (Quality, Ingredients, Preparation Time)</label><br>
+                    <textarea class="formtext" rows="5" cols="200" name="food" placeholder="Enter your comments here"></textarea>
+                    <label for="delivery">Any comments on the delivery? (Delivery time, Driver)</label><br>
+                    <textarea class="formtext" rows="5" cols="200" name="delivery" placeholder="Enter your comments here"></textarea>
+                <input type="submit" class="bluebutton" value="Submit">
+            </form>
+        </div>
+
     </div>
     </div>
     <footer class="footer">
