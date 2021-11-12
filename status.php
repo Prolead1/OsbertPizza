@@ -16,7 +16,7 @@
             $data = getdata("SELECT * FROM menuitems ORDER BY category");
         }
         $result = getdata("SELECT * FROM logins WHERE username ='".htmlspecialchars($_COOKIE['loginuname'])."'");
-        $row = (array)json_decode($result)[0];
+        $row = (array)data_parse($result)[0];
         $userid = (int)$row['userid'];
         $result = getdata('SELECT * FROM orders WHERE userid="'.$userid.'" ORDER BY paymentid DESC');
             ?>

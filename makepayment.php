@@ -1,7 +1,7 @@
 <?php
 require "./php/helpers.php";
 loginstatus();
-$order = (json_decode($_COOKIE["numitems"]));
+$order = (data_parse($_COOKIE["numitems"]));
 $flag = true;
 foreach ($order as $key => $value) {
     if (!$value == ""){
@@ -22,10 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cvv = htmlspecialchars($_POST["cvv"]);
         $order = htmlspecialchars($_COOKIE["numitems"]);
         $result = getdata("SELECT * FROM logins WHERE username ='".htmlspecialchars($_COOKIE['loginuname'])."'");
-        $row = (array)json_decode($result)[0];
+        $row = (array)data_parse($result)[0];
         $userid = (int)$row['userid'];
         $result = getdata("SELECT * FROM orders ORDER BY paymentid DESC");
-        $row = (array)json_decode($result)[0];
+        $row = (array)data_parse($result)[0];
         $paymentid = (int)($row['paymentid']);
         $paymentid += 1;
         $valid = checkdetails($cardname, $cardnumber, $cardexpiry, $cvv);

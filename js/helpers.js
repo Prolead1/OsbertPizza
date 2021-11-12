@@ -103,4 +103,25 @@ function error() {
         locationinfo.innerHTML = "Delivering to: "+ location;
     }
 }
-export {addMenuItem, setLocation};
+
+function jsdata_parse(string) {
+    result = {};
+    string = string.slice(1, -1);
+    string = string.split("}, ");
+    string[string.length - 1] = string[string.length - 1].slice(0, -1);
+    string.forEach(item => {
+        item = item.slice(item, 1, -1);
+        item = item.split(", ");
+        item.forEach(elem => {
+            elem = elem.split(": ");
+            if (elem[1].startsWith("[")){
+                elem[1] = elem[1].substring(1, -1);
+                elem[1] = explode(",");
+            }
+            result[elem[0]] = elem[1];
+        })
+    });
+    return result;
+}
+
+export {addMenuItem, setLocation, jsdata_parse};

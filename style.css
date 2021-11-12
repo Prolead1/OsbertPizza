@@ -589,3 +589,32 @@ ul{
     align-items: center;
     position: relative;
 }
+.container{
+    display: flex;
+    position: relative;
+
+}
+.accountdetails{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    border-right: 1px solid #c4c4c4;
+}
+
+.accountdetails .label{
+    margin:10px;
+}
+
+.username{
+    display: flex;
+    flex-direction: column;
+}
+
+#username, #password{
+    display: none;
+}
+
+#username.active, #password.active{
+    display: block;
+}

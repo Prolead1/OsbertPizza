@@ -10,7 +10,9 @@
 </head>
 <body>
 <?php
+    require "./php/helpers.php";
     $failed = "";
+
     if(isset($_COOKIE["loginstatus"])) {
         if ($_COOKIE["loginstatus"] == "True"){
             header('Location: ./menu.php');
@@ -18,6 +20,9 @@
         }
         elseif ($_COOKIE["loginstatus"] == "Failed"){
             $failed = "Login failed, invalid credentials";
+            setcookie("loginstatus","", time()+ 86400);
+        }elseif ($_COOKIE["loginstatus"] == "Username"){
+            $failed = "Invalid email entered, please try again with a valid email";
             setcookie("loginstatus","", time()+ 86400);
         }
     }
@@ -48,20 +53,30 @@
 
     </div>
 <?php
-    require "./php/helpers.php";
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // collect value of input field
         $username = strtolower(htmlspecialchars($_POST["username"]));
         $password = htmlspecialchars($_POST["password"]);
-        $data = getdata('SELECT * FROM logins WHERE username="'.$username.'" AND password="'.$password.'"');
-        if (strlen($data) > 20 ){
-            setcookie("loginstatus", "True", time() + 86400);
-            setcookie("loginuname", $username, time() + 86400);
-            header('Location: ./menu.php');
-            die();
-        }
-        else{
-            setcookie("loginstatus", "Failed", time() + 86400);
+        if (checkusername($username)){
+            $data = getdata("SELECT * FROM logins WHERE username='".$username."'");
+            $row = data_parse($data);
+            $row = (array)$row[0];
+            $password = (string)$row["password"];
+            if ($row['password'] == $password){
+                setcookie("loginstatus", "True", time() + 86400);
+                setcookie("loginuname", $username, time() + 86400);
+                header('Location: ./menu.php');
+                die();
+            }
+            else{
+                setcookie("loginstatus", "Failed", time() + 86400);
+                var_dump($row);
+                header('Location: ./login.php');
+                die();
+            }
+        }else{
+            setcookie("loginstatus", "Username", time() + 86400);
             header('Location: ./login.php');
             die();
         }

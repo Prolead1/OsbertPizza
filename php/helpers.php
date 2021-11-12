@@ -50,6 +50,31 @@ function dbinsert($query){
     }
     $db->query($query);
 }
+function data_parse($string){
+    $result = Array();
+    $string = substr($string, 1, -1);
+    $string = explode("}, ", $string);
+    $string[strlen($string)-1] = substr($string[strlen($string)-1], 0, -1);
+    foreach($string as $item){
+        $item = substr($item, 1, -1);
+        $item = explode(", ", $item);
+        foreach($item as $elem){
+            $elem = explode(": ", $elem);
+            $test = substr($elem[1], 0, 1);
+            if ($test == "["){
+                $elem[1] = substr($elem[1], 1, -1);
+                $elem[1] = explode(",", $elem[1]);
+            }
+            $result[$elem[0]] = $elem[1];
+        }
+    }
+    return $result;
+}
+function checkusername($username){
+    return preg_match("/(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/", $username);
+}
 
-
+function checkpassword($password){
+    return preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/",$password);
+}
 ?>

@@ -1,12 +1,12 @@
 import {addMenuItem, setLocation} from "./js/helpers.js";
-var data = JSON.parse(document.querySelectorAll('.hero')[0].dataset.content);
+var data = jsdata_parse(document.querySelectorAll('.hero')[0].dataset.content);
 var mapping = {};
 for (var i = 0; i < data.length; i++) {
     mapping[data[i]["menuid"]] = i;
 }
 window.addEventListener('load', () => {
     try{
-        var numitems = JSON.parse(document.cookie.split('; ').find(row => row.startsWith('numitems')).split('=')[1].split(','));
+        var numitems = jsdata_parse(document.cookie.split('; ').find(row => row.startsWith('numitems')).split('=')[1].split(','));
     }catch(e){
         console.error("Cookie 'numitems' not set.");
     }

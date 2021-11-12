@@ -1,7 +1,7 @@
 import {addMenuItem, setLocation} from "./js/helpers.js";
 var tabgroup = document.querySelectorAll('[data-component="tablist"]')[0];
 var menulist = document.querySelectorAll('[data-component="menulist"]')[0];
-var data = JSON.parse(document.querySelectorAll('.hero')[0].dataset.content);
+var data = jsdata_parse(document.querySelectorAll('.hero')[0].dataset.content);
 
 window.addEventListener('load', () => {
     try{
@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
     }
 
     try{
-        var numitems = JSON.parse(document.cookie.split('; ').find(row => row.startsWith('numitems')).split('=')[1].split(','));
+        var numitems = jsdata_parse(document.cookie.split('; ').find(row => row.startsWith('numitems')).split('=')[1].split(','));
     }catch(e){
         console.log("No items in cart.");
     }
@@ -33,12 +33,15 @@ window.addEventListener('load', () => {
     }
     var locationinfo = document.querySelector("h4.locationinfo");
     locationinfo.innerHTML = "Delivering to: "+ mylocation;
+
+    var changeloc = document.getElementById("changeloc");
+    changeloc.addEventListener("click", () => {
+        setLocation();});
     populateMenu(numitems);
     updateTab(index);
 
     addToCart(numitems);
 })
-
 
 
 function updateTab(index){

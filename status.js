@@ -1,6 +1,6 @@
-var data = JSON.parse(document.querySelectorAll('.hero')[0].dataset.content);
+var data = jsdata_parse(document.querySelectorAll('.hero')[0].dataset.content);
 try{
-    var orders = JSON.parse(document.querySelectorAll('.orderitems')[0].dataset.content);
+    var orders = jsdata_parse(document.querySelectorAll('.orderitems')[0].dataset.content);
 }catch(e){
     console.log("No orders found");
     var orders = {};
@@ -43,13 +43,13 @@ function populateStatus(){
         item.appendChild(title);
         item.appendChild(loc);
         loc.appendChild(document.createTextNode("Order delivering to "+orders[i]["location"]));
-        var numitems = JSON.parse(orders[i]['orders'].replaceAll('&quot;', '"'));
+        var numitems = jsdata_parse(orders[i]['orders'].replaceAll('&quot;', '"'));
         var carttotal = 0;
         Object.keys(numitems).forEach((key) => {
             carttotal = carttotal + addMenuItem(data[mapping[key]], div, numitems);
         });
         button.appendChild(document.createTextNode("View Order ID: "+orders[i]["paymentid"]));
-        title.appendChild(document.createTextNode("Cart total: S$"+carttotal));
+        title.appendChild(document.createTextNode("Cart total: S$"+carttotal.toFixed(2)));
         title.appendChild(document.createElement("br"));
         title.appendChild(document.createTextNode("Status: "+orders[i]["status"]));
         item.appendChild(div);

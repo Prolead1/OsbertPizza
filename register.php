@@ -16,11 +16,17 @@
             header('Location: ./menu.php');
             die();
         }
-        elseif ($_COOKIE["loginstatus"] == "Failed"){
+        elseif ($_COOKIE["loginstatus"] == "Password"){
             $failed = "Passwords don't match. Try again.";
             setcookie("loginstatus","", time()+ 86400);
         } elseif ($_COOKIE["loginstatus"] == "Exists"){
             $failed = "<a href='login.php' class='bluelink' style='font-size:12px;'>An account already exists with this username. Login instead.</a>";
+            setcookie("loginstatus","", time()+ 86400);
+        } elseif ($_COOKIE["loginstatus"] == "Strength"){
+            $failed = "Passwords must be minimum eight characters, with at least one uppercase letter, one lowercase letter and one number";
+            setcookie("loginstatus","", time()+ 86400);
+        } elseif ($_COOKIE["loginstatus"] == "Username"){
+            $failed = "Invalid email entered, please try again with a valid email";
             setcookie("loginstatus","", time()+ 86400);
         }
     }
@@ -61,25 +67,36 @@
         $username = strtolower(htmlspecialchars($_POST["username"]));
         $password1 = htmlspecialchars($_POST["password1"]);
         $password2 = htmlspecialchars($_POST["password2"]);
-        
-        if (strlen(getdata('SELECT * FROM logins WHERE username="'.$username.'"')) < 20){
-            if ($password1 == $password2) {
-                dbinsert('INSERT INTO logins VALUES (NULL, "'.$username.'", "'.$password1.'")');
-                setcookie("loginstatus", "True", time() + 86400);
-                setcookie("loginuname", $username, time() + 86400);
-                header('Location: ./menu.php');
-                die();
+
+        if (checkusername($username)){
+            if (checkpassword($password1)){
+                if (strlen(getdata('SELECT * FROM logins WHERE username="'.$username.'"')) < 20){
+                    if ($password1 == $password2) {
+                        dbinsert('INSERT INTO logins VALUES (NULL, "'.$username.'", "'.$password1.'")');
+                        setcookie("loginstatus", "True", time() + 86400);
+                        setcookie("loginuname", $username, time() + 86400);
+                        header('Location: ./menu.php');
+                        die();
+                    } else {
+                        setcookie("loginstatus", "Password", time() + 86400);
+                        header('Location: ./register.php');
+                        die();
+                    }
+                } else {
+                    setcookie("loginstatus", "Exists", time() + 86400);
+                    header('Location: ./register.php');
+                    die();
+                }
             } else {
-                setcookie("loginstatus", "Failed", time() + 86400);
+                setcookie("loginstatus", "Strength", time() + 86400);
                 header('Location: ./register.php');
                 die();
             }
-        } else {
-            setcookie("loginstatus", "Exists", time() + 86400);
+        } else{
+            setcookie("loginstatus", "Username", time() + 86400);
             header('Location: ./register.php');
             die();
         }
-
     }
 ?>
 </body>

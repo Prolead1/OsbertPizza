@@ -9,10 +9,81 @@
     <link rel="icon" type="image" href="./assets/favicon.ico">
 </head>
 <body>
-    <?php
+<script type="text/javascript">
+    if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+    }
+    function changeUser(){
+        var user = document.getElementById("username");
+        var password = document.getElementById("password");
+        if (password.classList.contains("active")){
+            password.classList.remove("active");
+        }
+        user.classList.add("active");
+    }
+    function changePassword(){
+        var user = document.getElementById("username");
+        var password = document.getElementById("password");
+        if (user.classList.contains("active")){
+            user.classList.remove("active");
+        }
+        password.classList.add("active");
+    }
+  </script>
+<?php
     require "./php/helpers.php";
     loginstatus();
-    ?>
+    $result = getdata("SELECT * FROM logins WHERE username ='".htmlspecialchars($_COOKIE['loginuname'])."'");
+    $row = (array)data_parse($result)[0];
+    $userid = (int)$row['userid'];
+    $username = (string)$row['username'];
+    $password = (string)$row['password'];
+    $fakeval = str_repeat("*", strlen($password));
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        if (isset($_POST["user"])){
+            $currentuser = $_POST["currusername"];
+            $newusername = $_POST["newusername"];
+            $enteredpassword = $_POST["password"];
+            if (checkusername($newusername)){
+                if ($enteredpassword == $password){
+                    $error = "Email successfully updated";
+                    setcookie('loginuname', $newusername, time() + 86400, "./login.php");
+                    $query = "UPDATE logins SET username='".$newusername."' WHERE username='".$currentuser."' AND password='".$password."'";
+                    dbinsert($query);
+                }else{
+                    $error = "Invalid password entered. Please try again.";
+                }
+            }else{
+                $error = "Email address not valid. Please try again.";
+            }
+
+        }elseif (isset($_POST["password"])){
+        $currentpass = $_POST["currpassword"];
+        $password1 = $_POST["password1"];
+        $password2 = $_POST["password2"];
+        if (checkpassword($password1)){
+            if ($password1 == $password2){
+            if ($currentpass == $password){
+                $error = "Password has been updated.";
+                $query = "UPDATE logins SET password='".$password1."' WHERE username='".$username."' AND password='".$password."'";
+                dbinsert($query);
+                // echo $query;
+                // header("Location: ./account.php");
+            }else{
+                $error = "Incorrect password.";
+                // header("Location: ./account.php");
+            }
+            }else{
+                $error = "New passwords don't match";
+                // header("Location: ./account.php");
+            }
+        }else{
+            $error = "Passwords must be minimum eight characters, with at least one uppercase letter, one lowercase letter and one number";
+            // header("Location: ./account.php");
+        }
+        }
+    }
+?>
     <nav class="navbar">
         <div class="navbuttons">
             <input id="navigation" type="image" src="./assets/nav.png">
@@ -27,6 +98,45 @@
     <div class="content">
     <div class="hero">
         <h1>My Account</h1>
+        <p class="bluelink"><?php echo $error?></p>
+        <div class="container">
+        <div class="accountdetails">
+            <label class="label">Email Address</label>
+            <div>
+            <input type="email" disabled name="email" value="<?php echo $username; ?>">
+            <button class="bluebutton" onclick="changeUser()">Change</button>
+            </div>
+            <label class="label">Password</label>
+            <div>
+            <input type="password" name="password" disabled value="<?php echo $fakeval; ?>">
+            <button class="bluebutton" onclick="changePassword()">Change</button>
+            </div>
+        </div>
+        <div class="accountdetails">
+        <form id="username" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="username">
+            <label class="label">Current Email Address</label>
+            <input class="formtext" type="email" name="currusername" placeholder="someone@example.com" required>
+            <label class="label">New Email Address</label>
+            <input class="formtext" type="email" name="newusername" placeholder="someone@example.com" required>
+            <label class="label">Password</label>
+            <input class="formtext" type="password" name="password" placeholder="Password" required>
+            <input type="submit" name="user" class="bluebutton" value="Update">
+        </div>
+        </form>
+        <form id="password" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="username">
+            <label class="label">Current Password</label>
+            <input class="formtext" type="password" name="currpassword" placeholder="Password" required>
+            <label class="label">New Password</label>
+            <input class="formtext" type="password" name="password1" placeholder="Password" required>
+            <label class="label">Retype New Password</label>
+            <input class="formtext" type="password" name="password2" placeholder="Password" required>
+            <input type="submit" name="password" class="bluebutton" value="Update">
+        </div>
+        </form>
+        </div>
+        </div>
     </div>
     </div>
     <footer class="footer">

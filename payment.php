@@ -12,7 +12,7 @@
 <?php 
     require "./php/helpers.php";
     loginstatus();
-    $order = (json_decode($_COOKIE["numitems"]));
+    $order = (data_parse($_COOKIE["numitems"]));
     $flag = true;
     foreach ($order as $key => $value) {
         if (!$value == ""){

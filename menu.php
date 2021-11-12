@@ -37,7 +37,7 @@
     </div>
     <div class="content">
     <div class="hero" data-content="<?php echo htmlspecialchars($data);?>">
-    <h4 class="locationinfo"></h4><h5 class="bluelink"onclick="setLocation();">Change Location</h5>
+    <h4 class="locationinfo"></h4><h5 id="changeloc" class="bluelink">Change Location</h5>
         <h1>Menu</h1>
 
         <div class="tabgroup" data-component="tablist">
